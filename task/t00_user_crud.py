@@ -44,4 +44,19 @@ def run05():
         r = session.query(User).filter(User.extra_info['field1'].astext=='122').all()
         pprint(r)
 
-run05()
+def run05b():
+    u = User()
+    u.custom_cols = dict(
+        col1=122,
+        col2='abb',
+    )
+    DbUtil.insert(u)
+
+    users = User.find_all()
+    pprint(users)
+
+    with DbUtil.get_session() as session:
+        r = session.query(User).filter(User.custom_cols['col1'].astext=='col2').all()
+        pprint(r)
+
+run05b()

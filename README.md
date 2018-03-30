@@ -16,11 +16,13 @@ CREATE DATABASE         sqlalchemy_start;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id SERIAL,
-  email      varchar(63),
-  name       varchar(63),
-  extra_info jsonb default '{}'::jsonb,
+  email       varchar(63),
+  name        varchar(63),
+  extra_info  jsonb default '{}'::jsonb,
+  custom_cols jsonb default '{}'::jsonb,
   PRIMARY KEY (id)
 );
+
 ```
 
 ```mysql
