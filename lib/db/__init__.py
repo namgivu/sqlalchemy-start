@@ -1,22 +1,18 @@
-#region connection as session
 from contextlib import contextmanager
+
+#region connection as session
+from lib.db.connection import *
+connection_string = get_connection_string(provider=DbProvider.MYSQL)
 
 from sqlalchemy     import create_engine
 from sqlalchemy.orm import sessionmaker
-connection_string = 'mysql+pymysql://{user}:{pswd}@{host}:{port}/{db}?charset=utf8'.format(
-    user='root',
-    pswd='root',
-    host='localhost',
-    port='33066',
-      db='sqlalchemy_start',
-)
 engine  = create_engine(connection_string)
 Session = sessionmaker(bind=engine)
 #endregion connection as session
 
 
 #util
-class MySqlUtil:
+class DbUtil:
 
     @classmethod
     @contextmanager #this helps to get around the error 'AttributeError: __exit__' #TODO why is that?

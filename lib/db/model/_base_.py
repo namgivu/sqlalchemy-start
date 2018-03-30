@@ -41,8 +41,8 @@ class BaseModel(object):
 
     @classmethod
     def find_all(cls):
-        from lib.db.mysql import MySqlUtil
-        with MySqlUtil.get_session() as session:
+        from lib.db import DbUtil
+        with DbUtil.get_session() as session:
             rows = session.query(cls).all()
             return rows
 

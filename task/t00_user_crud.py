@@ -1,10 +1,10 @@
-from lib.db.mysql       import *
+from lib.db             import *
 from lib.db.model._all_ import *
 from lib._common_       import *
 
 
 def run01():
-    with MySqlUtil.get_session() as session:
+    with DbUtil.get_session() as session:
         users = session.query(User).all()
         pprint(users)
 
@@ -27,7 +27,7 @@ def run04():
         email = 'some@eemail.com',
         name  = 'Some Name',
     ))
-    MySqlUtil.insert(u)
+    DbUtil.insert(u)
 
     users = User.find_all()
     pprint(users)

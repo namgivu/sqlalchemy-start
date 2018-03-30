@@ -1,4 +1,4 @@
-from lib.db.mysql import *
+from lib.db import *
 
 
 class User(DeclarativeBase):
