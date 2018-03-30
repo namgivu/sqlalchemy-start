@@ -1,19 +1,19 @@
-from contextlib import contextmanager
-
 #region connection as session
+from config import *
+assert DB_PROVIDER
 from lib.db.connection import *
-# connection_string = get_connection_string(provider=DbProvider.MYSQL)
-connection_string = get_connection_string(provider=DbProvider.POSTGRES) #TODO make provider as a config entry
+connection_string = get_connection_string(DB_PROVIDER) #TODO make provider as a config entry
 
 from sqlalchemy     import create_engine
 from sqlalchemy.orm import sessionmaker
 engine  = create_engine(connection_string)
 Session = sessionmaker(bind=engine)
-#endregion connection as session
+#endregion
 
 
 #util
 class DbUtil:
+    from contextlib import contextmanager
 
     @classmethod
     @contextmanager #this helps to get around the error 'AttributeError: __exit__' #TODO why is that?
@@ -57,5 +57,5 @@ class DbUtil:
 
 #common import among model classes
 from lib.db.model._base_ import DeclarativeBase
-from sqlalchemy import Column, UniqueConstraint, ForeignKey
-from sqlalchemy import String, Integer, SmallInteger, BigInteger, DateTime, Float
+from sqlalchemy          import Column, UniqueConstraint, ForeignKey
+from sqlalchemy          import String, Integer, SmallInteger, BigInteger, DateTime, Float

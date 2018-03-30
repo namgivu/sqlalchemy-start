@@ -1,8 +1,5 @@
-class DbProvider:
-    MYSQL    = 'mysql'
-    POSTGRES = 'postgres'
-
 def get_connection_string(provider):
+    from config import DbProvider
     if False: pass
 
     elif provider==DbProvider.MYSQL:

@@ -1,16 +1,17 @@
 #get-started
-start mysql container
+##start mysql container
 ```bash
 docker-compose up #mysql container at port 33066 (NOT 3306 the default mysql port)
 ```
 
-create db
+##create db
+choose database provider to work with eg. postgres
 ```sql
 DROP DATABASE IF EXISTS sqlalchemy_start;
 CREATE DATABASE         sqlalchemy_start;
 ```
 
-table users
+##table users
 ```postgresql
 CREATE TABLE users (
   id SERIAL,
@@ -28,8 +29,12 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDb DEFAULT CHARSET=utf8;
 
-
 ```
+
+#config python app
+CODE='/path/to/sqlalchemy-start/git-cloned'
+Config at file `$CODE/config`
+
 
 #clean up
 CAUTION clear every thing ie. container+volume
