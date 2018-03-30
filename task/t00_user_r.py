@@ -13,4 +13,12 @@ def run02():
     users = User.find_all()
     pprint(users)
 
-run02()
+
+def run03():
+    u = User(**dict(
+        email = 'some@eemail.com',
+        name  = 'Some Name',
+    ))
+    pprint(u.to_dict())
+
+run03()
