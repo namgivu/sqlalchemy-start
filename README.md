@@ -13,15 +13,18 @@ CREATE DATABASE         sqlalchemy_start;
 
 ##table users
 ```postgresql
+DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id SERIAL,
-  email varchar(63),
-  name  varchar(63),
+  email      varchar(63),
+  name       varchar(63),
+  extra_info jsonb default '{}'::jsonb,
   PRIMARY KEY (id)
 );
 ```
 
 ```mysql
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(63),
