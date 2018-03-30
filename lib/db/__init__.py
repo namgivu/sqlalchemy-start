@@ -2,7 +2,8 @@ from contextlib import contextmanager
 
 #region connection as session
 from lib.db.connection import *
-connection_string = get_connection_string(provider=DbProvider.MYSQL)
+# connection_string = get_connection_string(provider=DbProvider.MYSQL)
+connection_string = get_connection_string(provider=DbProvider.POSTGRES) #TODO make provider as a config entry
 
 from sqlalchemy     import create_engine
 from sqlalchemy.orm import sessionmaker

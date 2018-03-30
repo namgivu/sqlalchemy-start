@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="93e57fcc-3264-4afd-82f9-fb752f9d2af1">
+    <data-source source="LOCAL" name="root@localhost" uuid="93e57fcc-3264-4afd-82f9-fb752f9d2af1">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
@@ -15,7 +15,7 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="sqlalchemy_start@localhost" uuid="53cf172a-25ac-4d17-a658-5b00753fd278">
+    <data-source source="LOCAL" name="sqlalchemy_start@localhost" uuid="0a23b6d4-3818-4786-ab00-4d3d7abbd9ff">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
@@ -28,6 +28,18 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="postgres@localhost" uuid="426a7246-3be8-4305-a7e3-b4a97a030aab">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:54322/postgres</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="sqlalchemy_start@localhost [2]" uuid="910e928f-95f0-4313-8e1a-1a6b4c35f1a6">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:54322/sqlalchemy_start</jdbc-url>
     </data-source>
   </component>
 </project>

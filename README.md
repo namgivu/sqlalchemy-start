@@ -11,13 +11,24 @@ CREATE DATABASE         sqlalchemy_start;
 ```
 
 table users
-```sql
+```postgresql
+CREATE TABLE users (
+  id SERIAL,
+  email varchar(63),
+  name  varchar(63),
+  PRIMARY KEY (id)
+);
+```
+
+```mysql
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(63),
   `name`  varchar(63),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDb DEFAULT CHARSET=utf8;
+
+
 ```
 
 #clean up

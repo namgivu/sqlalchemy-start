@@ -1,3 +1,5 @@
 #db
 sqlalchemy==1.2.5
 pymysql==0.8.0
+psycopg2==2.7.3.1
+

@@ -15,4 +15,14 @@ def get_connection_string(provider):
         )
         return connection_string
 
+    elif provider==DbProvider.POSTGRES:
+        connection_string = 'postgresql://{user}:{pswd}@{host}:{port}/{db}'.format(
+            user='postgres',
+            pswd='postgres',
+            host='localhost',
+            port='54322',
+              db='sqlalchemy_start',
+        )
+        return connection_string
+
     else: raise Exception('Db provider not supported "%s"' % provider)
