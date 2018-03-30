@@ -19,3 +19,9 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDb DEFAULT CHARSET=utf8;
 ```
+
+#clean up
+CAUTION clear every thing ie. container+volume
+```bash
+docker-compose down -v #ref. https://stackoverflow.com/a/45512667/248616
+```

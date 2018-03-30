@@ -6,12 +6,33 @@ services:
     image: mysql:latest #consider to use mariadb ref. https://stackoverflow.com/questions/39175194/docker-compose-persistent-data-mysql#comment69940546_39208187
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_USER: 'some_user'
-      MYSQL_PASS: 'some_user'
+      MYSQL_USER:          'some_user'
+      MYSQL_PASS:          'some_user'
     volumes:
-      - my-datavolume:/var/lib/mysql #the volume to be created at @physical-machine:/var/lib/docker/volumes
+      - mysql-data-vol:/var/lib/mysql #the volume to be created at @physical-machine:/var/lib/docker/volumes
     ports:
       - '33066:3306' #local-port:container-port
-volumes:
-  my-datavolume:
 
+#WARNING: Service "mysql" is using volume "/var/lib/mysql" from the previous container.
+#Host mapping "sqlalchemystart_mysql-data-vol" has no effect. Remove the existing containers (with `docker-comRecreating mysql_container ... done
+
+  postgres:
+    container_name: postgres_container
+    restart: always
+
+    image: mdillon/postgis  #postgres image without postGIS support
+    #image: postgres:latest #postgres image with    postGIS support
+
+    environment:
+      POSTGRES_USER:     'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB:       'postgres' #TODO do we need it here, can we just define db in connection_string when connecting via sqlalchemy?
+    volumes:
+      - postgres-data-vol:/var/lib/postgresql/data
+    ports:
+      - '54322:5432' #local-port:container-port
+
+volumes:
+  mysql-data-vol:
+  postgres-data-vol:
+    driver: local
