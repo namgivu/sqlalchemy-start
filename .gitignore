@@ -105,6 +105,7 @@ ENV/
 .idea/modules.xml
 .idea/other.xml
 .idea/workspace.xml
+.idea/deployment.xml
 .idea/dictionaries/
 .idea/dataSources.local.xml
 .idea/dataSources/
