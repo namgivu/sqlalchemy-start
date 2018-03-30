@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+.idea/sqlalchemy-start.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/other.xml
+.idea/workspace.xml
+.idea/dictionaries/
