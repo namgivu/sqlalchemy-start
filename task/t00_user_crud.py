@@ -21,4 +21,15 @@ def run03():
     ))
     pprint(u.to_dict())
 
-run03()
+
+def run04():
+    u = User(**dict(
+        email = 'some@eemail.com',
+        name  = 'Some Name',
+    ))
+    MySqlUtil.insert(u)
+
+    users = User.find_all()
+    pprint(users)
+
+run04()

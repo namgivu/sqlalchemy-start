@@ -35,6 +35,10 @@ class BaseModel(object):
 
         return d
 
+    def __repr__(self):
+        from pprint import pformat
+        return pformat(self.to_dict())
+
     @classmethod
     def find_all(cls):
         from lib.db.mysql import MySqlUtil
