@@ -46,3 +46,7 @@ CAUTION clear every thing ie. container+volume
 ```bash
 docker-compose down -v #ref. https://stackoverflow.com/a/45512667/248616
 ```
+
+#JSONB w/ sqlalchemy intro ref
+https://gist.github.com/sebflipper/e95d12d72492fbab1b08
+https://www.compose.com/articles/using-json-extensions-in-postgresql-from-python-2/
