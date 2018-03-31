@@ -78,6 +78,13 @@ class DbUtil:
             return sql
 
 
+    @classmethod
+    def run_sql(cls, sql):
+        """ref. https://stackoverflow.com/a/17987782/248616"""
+        from sqlalchemy import text
+        return engine.execute(text(sql))
+
+
 ##region common import among model classes
 
 #model base class
