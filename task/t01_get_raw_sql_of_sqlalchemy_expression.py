@@ -33,7 +33,7 @@ def run01b():
 
 def run02a():
     """
-    CRUD query
+    CRUD query simple
     ref. https://stackoverflow.com/a/37842617/248616
     """
     q   = update(User).values(name='some name')
@@ -52,8 +52,7 @@ INSERT INTO users (id, name, custom_cols, extra_info) VALUES (%(id)s, 'some name
 
 def run02b():
     """
-    CRUD query
-    ref. https://stackoverflow.com/a/37842617/248616
+    CRUD query simple
     """
     q   = update(User).values(name='some name')
     sql = DbUtil.get_raw_sql(sqlalchemy_statement=q, sql_dialect=DIALECT_POSTGRES)
@@ -68,4 +67,64 @@ UPDATE users SET name='some name'
 INSERT INTO users (id, name, custom_cols, extra_info) VALUES (%(id)s, 'some name', %(custom_cols)s, %(extra_info)s) #TODO how to limit users' columns listing to be exact as .values(col1='val1', ...) call?
     '''
 
-run02b()
+
+def run04a():
+    """
+    JSONB query @ select
+    ref. https://stackoverflow.com/a/37842617/248616
+    """
+    with DbUtil.get_session() as session:
+        #region no-limit columns in SELECT clause
+        q   = session.query(User)
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+
+        q   = session.query(User).filter(User.name=='abb')
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+
+        q   = session.query(User).filter(User.custom_cols['col1']=='abb')
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+        #endregion
+
+        #region limit columns in SELECT clause, with alias
+        q   = session.query(User).with_entities(User.name)
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+
+        q   = session.query(User.name) #limit columns in SELECT clause ref. https://stackoverflow.com/a/11535992/248616
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+
+        q   = session.query(User.name.label('some alias name')) #with alias ref. https://stackoverflow.com/a/11535992/248616
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+
+        q   = session.query(User.custom_cols['col1']) #limit columns in SELECT clause
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+
+        q   = session.query(User.custom_cols['col1'].label('some alias name')) #limit columns in SELECT clause
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+        #endregion
+
+
+def run04b():
+    """
+    JSONB query @ CRUD
+    """
+    with DbUtil.get_session() as session:
+        #read
+        q   = session.query(User.custom_cols['col1'].label('some alias name')) #limit columns in SELECT clause
+        sql = DbUtil.get_raw_sql(sqlalchemy_expression=q, sql_dialect=DIALECT_POSTGRES)
+        print(sql); print()
+
+    #create
+    q   = insert(User).values(custom_cols={'col1':122}) #TODO how to get this working?
+    sql = DbUtil.get_raw_sql(sqlalchemy_statement=q, sql_dialect=DIALECT_POSTGRES)
+    print(sql); print(122)
+
+
+run04b()

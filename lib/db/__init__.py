@@ -69,7 +69,7 @@ class DbUtil:
 
         elif sqlalchemy_expression:
             exp = sqlalchemy_expression #alias $exp means expression
-            sql = str(exp.statement.compile(dialect=sql_dialect)) #get a raw, compiled SQL query from a SQLAlchemy expression ref. https://stackoverflow.com/a/25563491/248616
+            sql = str(exp.statement.compile(dialect=sql_dialect, compile_kwargs={'literal_binds': True})) #get a raw, compiled SQL query from a SQLAlchemy expression ref. https://stackoverflow.com/a/25563491/248616
             return sql
 
         elif sqlalchemy_statement is not None: #NOTE we have to use `is not None` here; otherwise, an error occurs 'TypeError: Boolean value of this clause is not defined'
@@ -88,7 +88,7 @@ from sqlalchemy import Column, UniqueConstraint, ForeignKey
 from sqlalchemy import String, Integer, SmallInteger, BigInteger, DateTime, Float
 
 #crud command
-from sqlalchemy import update, insert
+from sqlalchemy import select, update, insert
 
 #json column
 from sqlalchemy.ext.mutable              import MutableDict
