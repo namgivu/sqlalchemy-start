@@ -53,3 +53,4 @@ https://www.compose.com/articles/using-json-extensions-in-postgresql-from-python
 
 jsonb raw sql function
 https://www.postgresql.org/docs/9.5/static/functions-json.html
+https://stackoverflow.com/a/46799159/248616
