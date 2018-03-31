@@ -33,4 +33,16 @@ def r2b_add_new_field():
     rows = User.find_all()
     pprint([r for r in rows])
 
-r2b_add_new_field()
+def r2c_add_new_field():
+    DbUtil.run_sql('''
+    update users set custom_cols=JSONB_SET(
+        custom_cols,
+        '{new_field}',
+        '1.22',
+        TRUE
+    );
+    ''')
+    rows = User.find_all()
+    pprint([r for r in rows])
+
+r2c_add_new_field()
