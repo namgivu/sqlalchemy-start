@@ -55,7 +55,15 @@ class DbUtil:
             return model_instance
 
 
+    @classmethod
+    def get_raw_sql(cls, sqlalchemy_expression, sql_dialect):
+        q   = sqlalchemy_expression #q means query
+        sql = str(q.statement.compile(dialect=sql_dialect)) #get a raw, compiled SQL query from a SQLAlchemy expression ref. https://stackoverflow.com/a/25563491/248616
+        return sql
+
+
 ##region common import among model classes
+
 #model base class
 from lib.db.model._base_    import DeclarativeBase
 
@@ -66,4 +74,9 @@ from sqlalchemy             import String, Integer, SmallInteger, BigInteger, Da
 #json column
 from sqlalchemy.ext.mutable import MutableDict
 from sqlalchemy.dialects.postgresql.json import JSONB
+
+#sql dialect
+from sqlalchemy.dialects import postgresql; DIALECT_POSTGRES = postgresql.dialect()
+from sqlalchemy.dialects import mysql;      DIALECT_MYSQL    = mysql.dialect()
+
 ##endregion
