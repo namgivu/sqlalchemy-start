@@ -105,4 +105,7 @@ from sqlalchemy.dialects.postgresql.json import JSONB
 from sqlalchemy.dialects import postgresql; DIALECT_POSTGRES = postgresql.dialect()
 from sqlalchemy.dialects import mysql;      DIALECT_MYSQL    = mysql.dialect()
 
+#hybrid property
+from sqlalchemy.ext.hybrid import hybrid_property
+
 ##endregion
