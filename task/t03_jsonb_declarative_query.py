@@ -1,6 +1,5 @@
 from lib.db             import *
 from lib.db.model._all_ import *
-from lib._common_       import *
 
 
 def seeding_data():
@@ -36,4 +35,14 @@ def r02():
         r=session.query(User.name, User.custom_cols).filter(User.name=='ccf').all(); print(r)
         #endregion
 
-r02()
+def r03():
+    """
+    query via hybrid prop pointing to a field inside a jsonb column
+    TODO none of the belows is working
+    """
+    seeding_data()
+    with DbUtil.get_session() as session:
+        r=session.query(User.name, User.custom_cols).filter(User.custom_cols_field=='ccf').all(); print(r)
+        r=session.query(User.name, User.custom_cols).filter(User.custom_cols_field.astext=='ccf').all(); print(r)
+
+r03()
