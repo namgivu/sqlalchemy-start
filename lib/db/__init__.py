@@ -95,7 +95,7 @@ from sqlalchemy import Column, UniqueConstraint, ForeignKey
 from sqlalchemy import String, Integer, SmallInteger, BigInteger, DateTime, Float
 
 #crud command
-from sqlalchemy import select, update, insert
+from sqlalchemy import select, update, insert, delete
 
 #json column
 from sqlalchemy.ext.mutable              import MutableDict
