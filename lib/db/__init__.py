@@ -91,15 +91,21 @@ class DbUtil:
 from lib.db.model._base_    import DeclarativeBase
 
 #table column type
+from sqlalchemy import Column, UniqueConstraint, ForeignKey
+from sqlalchemy import String, Integer, SmallInteger, BigInteger, DateTime, Float
 
 #crud command
+from sqlalchemy import select, update, insert, delete
 
 #json column
+from sqlalchemy.ext.mutable              import MutableDict
+from sqlalchemy.dialects.postgresql.json import JSONB
 
 #sql dialect
 from sqlalchemy.dialects import postgresql; DIALECT_POSTGRES = postgresql.dialect()
 from sqlalchemy.dialects import mysql;      DIALECT_MYSQL    = mysql.dialect()
 
 #hybrid property
+from sqlalchemy.ext.hybrid import hybrid_property
 
 ##endregion
