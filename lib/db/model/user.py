@@ -17,7 +17,7 @@ class User(DeclarativeBase):
 
     #region custom_cols_field --> custom_cols.custom_cols_field column
     '''c#-alike property for python with sqlalchemy ref. https://stackoverflow.com/a/3324965/248616, sqlalchemy hybrid-property ref2. https://stackoverflow.com/a/31915355/248616'''
-    @hybrid_property
+    @property
     def custom_cols_field(self): f='custom_cols_field'; return self.custom_cols[f] if f in self.custom_cols else None
 
     @custom_cols_field.setter #IMPORTANT NOTE: custom_cols_field == method name above
