@@ -6,8 +6,8 @@ import pytz
 
 sgt = pytz.timezone('Asia/Singapore')
 utc = pytz.timezone('UTC')
-sgt_now = sgt.localize(datetime.utcnow())
-utc_now = utc.localize(datetime.utcnow())
+sgt_now = sgt.localize(datetime.now())
+utc_now = utc.localize(datetime.now())
 
 def seeding_data():
     engine.execute(delete(User))
