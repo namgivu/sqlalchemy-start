@@ -42,8 +42,11 @@ Config at file `$CODE/config`
 
 
 #clean up
-CAUTION clear every thing ie. container+volume
 ```bash
+#turn off container but keep volumns
+docker-compose down
+
+#CAUTION clear every thing ie. container+volume
 docker-compose down -v #ref. https://stackoverflow.com/a/45512667/248616
 ```
 
