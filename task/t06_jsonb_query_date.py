@@ -20,6 +20,7 @@ def r01():
 
         #jsonb == date value
         #sqlalchemy jsonb cast to python type ref. https://stackoverflow.com/a/44960193/248616
+        r=session.query(User.name, User.custom_cols['date_field'].astext.cast(Date)).all(); pprint(r)
         r=session.query(User.name, User.custom_cols).filter(
             User.custom_cols['date_field'].astext.cast(Date)==datetime.utcnow().date()
         ).all(); pprint(r)
