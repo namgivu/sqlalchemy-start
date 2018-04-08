@@ -36,7 +36,7 @@ def json_dumps_default(val):
     elif isinstance(val, DateTime):
         return val.strftime("%Y-%m-%d %H:%M:%S %z") #convert datetime with timezone to string ref. https://stackoverflow.com/a/43414711/248616
     elif isinstance(val, Date):
-        return val.strftime("%Y-%m-%d") #convert datetime with timezone to string ref. https://stackoverflow.com/a/43414711/248616
+        return val.strftime("%Y-%m-%d")
     else:
         return str(val)
 

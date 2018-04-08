@@ -11,7 +11,7 @@ def seeding_data():
 def r01():
     seeding_data()
     with DbUtil.get_session() as session:
-        r=session.query(User.name, User.custom_cols).filter().all(); pprint(r)
+        r=session.query(User.name, User.custom_cols).all(); pprint(r)
 
         #jsonb is None
         r=session.query(User.name, User.custom_cols).filter(
@@ -24,5 +24,11 @@ def r01():
         r=session.query(User.name, User.custom_cols).filter(
             User.custom_cols['date_field'].astext.cast(Date)==datetime.utcnow().date()
         ).all(); pprint(r)
+
+        print()
+        rows=session.query(User).all()
+        for r in rows:
+            d = r.custom_cols['date_field']
+            pprint(d)
 
 r01()
