@@ -15,7 +15,7 @@ def r01():
         r=session.query(User.name, User.custom_cols).filter().all(); pprint(r)
 
         #jsonb is None
-        r=session.query(User.name, User.custom_cols).filter(User.custom_cols['bool_field'].astext.is_(None)).all();           pprint(r)
+        r=session.query(User.name, User.custom_cols).filter(User.custom_cols['bool_field'].astext.is_(None)).all(); pprint(r)
 
         #jsonb == True/False
         #sqlalchemy jsonb filter compare with True, and sqlalchemy jsonb cast boolean ref. https://stackoverflow.com/a/44960193/248616
