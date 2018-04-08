@@ -1,14 +1,56 @@
-#region connection as session
+##region common import among model classes
+
+#model base class
+from lib.db.model._base_    import DeclarativeBase
+
+#table column type
+from sqlalchemy import Column, UniqueConstraint, ForeignKey
+from sqlalchemy import String, Integer, Boolean, SmallInteger, BigInteger, DateTime, Date, Float
+
+#crud command
+from sqlalchemy import select, update, insert, delete
+
+#json column
+from sqlalchemy.ext.mutable              import MutableDict
+from sqlalchemy.dialects.postgresql.json import JSONB
+
+#sql dialect
+from sqlalchemy.dialects import postgresql; DIALECT_POSTGRES = postgresql.dialect()
+from sqlalchemy.dialects import mysql;      DIALECT_MYSQL    = mysql.dialect()
+
+#hybrid property
+from sqlalchemy.ext.hybrid import hybrid_property
+
+##endregion
+
+
+##region connection as session
 from config import *
 assert DB_PROVIDER
 from lib.db.connection import *
 connection_string = get_connection_string(DB_PROVIDER) #TODO make provider as a config entry
 
+#region config engine to decode jsonb value as datetime ref. https://stackoverflow.com/a/36438671/248616
+def json_dumps_default(val):
+    if False: pass
+    elif isinstance(val, DateTime):
+        return val.strftime("%Y-%m-%d %H:%M:%S %z") #convert datetime with timezone to string ref. https://stackoverflow.com/a/43414711/248616
+    elif isinstance(val, Date):
+        return val.strftime("%Y-%m-%d") #convert datetime with timezone to string ref. https://stackoverflow.com/a/43414711/248616
+    else:
+        return str(val)
+
+def json_dumps(d):
+    import json
+    return json.dumps(d, default=json_dumps_default)
+#endregion
+
 from sqlalchemy     import create_engine
 from sqlalchemy.orm import sessionmaker
-engine  = create_engine(connection_string)
+engine  = create_engine(connection_string, json_serializer=json_dumps) #config engine to decode jsonb value as datetime ref. https://stackoverflow.com/a/36438671/248616
 Session = sessionmaker(bind=engine)
-#endregion
+
+##endregion
 
 
 #util
@@ -84,28 +126,3 @@ class DbUtil:
         from sqlalchemy import text
         return engine.execute(text(sql))
 
-
-##region common import among model classes
-
-#model base class
-from lib.db.model._base_    import DeclarativeBase
-
-#table column type
-from sqlalchemy import Column, UniqueConstraint, ForeignKey
-from sqlalchemy import String, Integer, Boolean, SmallInteger, BigInteger, DateTime, Float
-
-#crud command
-from sqlalchemy import select, update, insert, delete
-
-#json column
-from sqlalchemy.ext.mutable              import MutableDict
-from sqlalchemy.dialects.postgresql.json import JSONB
-
-#sql dialect
-from sqlalchemy.dialects import postgresql; DIALECT_POSTGRES = postgresql.dialect()
-from sqlalchemy.dialects import mysql;      DIALECT_MYSQL    = mysql.dialect()
-
-#hybrid property
-from sqlalchemy.ext.hybrid import hybrid_property
-
-##endregion

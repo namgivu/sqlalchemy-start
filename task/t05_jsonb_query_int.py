@@ -17,7 +17,7 @@ def r01():
         r=session.query(User.name, User.custom_cols).filter(User.custom_cols['int_field'].astext.is_(None)).all(); pprint(r)
 
         #jsonb == int value
-        #sqlalchemy jsonb filter compare with True, and sqlalchemy jsonb cast boolean ref. https://stackoverflow.com/a/44960193/248616
+        #sqlalchemy jsonb cast to python type ref. https://stackoverflow.com/a/44960193/248616
         r=session.query(User.name, User.custom_cols).filter(User.custom_cols['int_field'].astext.cast(Integer)==122).all(); pprint(r)
 
 r01()
